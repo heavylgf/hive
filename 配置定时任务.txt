@@ -1,0 +1,22 @@
+
+flume-ng agent -n agent1 -c conf -f /etc/flume-ng/conf/flume-conf.properties -Dflume.root.logger=DEBUG,console
+
+
+
+hadoop fs -chmod 777 /logs
+
+
+0    0    *    *    *    /home/yourshell.sh
+
+
+[root@flume conf]# crontab -l
+0 0 * * * sh /usr/local/aa.sh
+0 0 * * * /usr/bin/python /opt/test/create_file.py
+
+
+[root@flume conf]# vi aa.sh
+
+su flume
+hdfs dfs -cat /logs/2017-07-06* | hdfs dfs -copyFromLocal - /flume/file;
+hive -e 'load data inpath 'hdfs://nameservice1/flume/file' into table test_load partition (dt='2017-07-17', hour = '15')';
+
